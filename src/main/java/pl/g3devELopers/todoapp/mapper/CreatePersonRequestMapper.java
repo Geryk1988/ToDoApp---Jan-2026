@@ -13,13 +13,14 @@ public class CreatePersonRequestMapper {
 
     private final PersonRepository personRepository;
 
-    public ResponseEntity<?> createPersonRequest(CreatePersonRequest createPersonRequest){
-         personRepository.save(PersonEntity.builder()
+    public ResponseEntity<?> createPersonRequest(CreatePersonRequest createPersonRequest) {
+        personRepository.save(PersonEntity.builder()
                 .name(createPersonRequest.name())
                 .surname(createPersonRequest.surname())
                 .email(createPersonRequest.email())
                 .build());
-         return ;
-    }
 
+        return ResponseEntity.ok(createPersonRequest);
+    }
 }
+

@@ -6,8 +6,8 @@ import lombok.*;
 
 @Data
 @Entity
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class PersonEntity {
     @Id
