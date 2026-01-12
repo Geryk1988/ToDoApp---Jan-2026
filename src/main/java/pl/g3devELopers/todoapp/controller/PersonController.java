@@ -3,10 +3,9 @@ package pl.g3devELopers.todoapp.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.g3devELopers.todoapp.domain.Person;
-import pl.g3devELopers.todoapp.dto.CreatePersonRequest;
+import pl.g3devELopers.todoapp.dto.CreatePerson;
 import pl.g3devELopers.todoapp.dto.PersonDto;
-import pl.g3devELopers.todoapp.mapper.PersonDtoMapper;
+import pl.g3devELopers.todoapp.mapper.person.PersonDtoListMapper;
 import pl.g3devELopers.todoapp.service.PersonService;
 
 import java.util.List;
@@ -18,18 +17,17 @@ import java.util.List;
 public class PersonController {
 
     private final PersonService personService;
-    private final PersonDtoMapper personDtoMapper;
+
+    private final PersonDtoListMapper personDtoListMapper;
 
     @GetMapping("/list")
-    public List<PersonDto> getList(@RequestParam String name){
-        List<Person> personList = personService.getList(name);
-        List<PersonDto> personDtoList = personDtoMapper.map(personList);
-        return personDtoList;
+    public List<PersonDto> personDtoList(@RequestParam(required = false) String email){
+        return personDtoListMapper.personDtoListMapper(email);
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addPerson(@RequestBody CreatePersonRequest createPersonRequest){
-            return personService.addPerson(createPersonRequest);
+    public ResponseEntity<?> addPerson(@RequestBody CreatePerson createPerson){
+            return personService.addPerson(createPerson);
     }
 
     @DeleteMapping("/delete/{id}")
